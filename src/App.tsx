@@ -1,11 +1,12 @@
 import React from 'react';
-import Map from './Map/Map';
-import './App.css';
+import Map from "./Map/Map";
 
-function App() {
-  return (
-      <Map/>
-  )
-}
+function App(){
+    return (
+        <Map/>
+    );
+};
 
 export default App;
+
+
