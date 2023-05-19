@@ -1,16 +1,26 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import L, { LatLngBoundsLiteral, LatLngTuple } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './Map.css';
-import { SidebarItem } from "../Sidebar/SidebarItem";
+import SpawnsService from "../Services/SpawnsService";
+import { SpawnMarker } from "../Data/Spawns/SpawnMarker";
+import SidebarItem from "../Sidebar/SidebarItem";
 import Sidebar from "../Sidebar/Sidebar";
 
 function Map() {
+    // -----------------------------------------------------------------------------------------------------------------
+    // VARIABLES
+    // ---- MAP
     const mapRef = useRef<HTMLDivElement>(null);
     const map = useRef<L.Map>();
     const markerGroup = useRef<L.LayerGroup>(L.layerGroup());
     const [showMarkers, setShowMarkers] = useState(false);
 
+    // ---- SERVICE
+    const spawnsService = useMemo(() => new SpawnsService(), []);
+
+    // -----------------------------------------------------------------------------------------------------------------
+    // ---- INITIALIZE MAP
     useEffect(() => {
         if (mapRef.current && !mapRef.current.hasChildNodes()) {
             map.current = L.map(mapRef.current, {
@@ -42,30 +52,26 @@ function Map() {
         }
     }, []);
 
+    // -----------------------------------------------------------------------------------------------------------------
+    // ---- MARKERS
     useEffect(() => {
-        const addPointsOfInterest = (data: any) => {
-            data.forEach((poi: any) => {
-                const { marker, spawns } = poi;
-                const latitude = -marker[1] / 1000;
-                const longitude = marker[0] / 1000;
-
+        const markerGroupLocal = markerGroup.current;
+        const addMobSpawns = (data: SpawnMarker[]) => {
+            data.forEach((spawn: SpawnMarker) => {
                 const customIcon = L.icon({
                     iconUrl: "https://gamepedia.cursecdn.com/conanexiles_gamepedia/thumb/d/da/T_Map_Icon_Purge.png/24px-T_Map_Icon_Purge.png",
                     iconSize: [24, 24],
                 });
-
-                const markerInstance = L.marker([latitude, longitude], { icon: customIcon }).bindPopup(spawns[0].name);
-
+                const markerInstance = L.marker([(-spawn.marker[1] / 1000), (spawn.marker[0] / 1000)], { icon: customIcon }).bindPopup(spawn.id);
                 markerGroup.current.addLayer(markerInstance);
-            });
+            })
         };
 
-        const fetchAndAddMarkers = async () => {
+        const fetchAndAddSpawns = async () => {
             try {
-                const response = await fetch('https://raw.githubusercontent.com/Juijang/wikidata/master/spawns.json');
-                const data = await response.json();
+                const data = await spawnsService.getSpawns();
                 if (map.current) {
-                    addPointsOfInterest(data);
+                    addMobSpawns(data);
                     if (showMarkers) {
                         markerGroup.current.addTo(map.current);
                     }
@@ -75,31 +81,33 @@ function Map() {
             }
         };
 
-        fetchAndAddMarkers();
+        if (showMarkers) {
+            fetchAndAddSpawns();
+        } else {
+            markerGroupLocal.clearLayers();
+            if (map.current) {
+                map.current.removeLayer(markerGroupLocal);
+            }
+        }
 
         return () => {
-            if (map.current && markerGroup.current) {
-                markerGroup.current.clearLayers();
-                map.current.removeLayer(markerGroup.current);
+            if (map.current && markerGroupLocal) {
+                markerGroupLocal.clearLayers();
+                map.current.removeLayer(markerGroupLocal);
             }
         };
-    }, [showMarkers, markerGroup.current]);
+    }, [showMarkers, spawnsService]);
 
-    // -----------------------------------------------------------------------------------------------------------------
-    // ---- MAP CONTROLS
-    let controls : SidebarItem[] = [
-        {
-            id: 1,
-            text: "Show Markers",
-            icon: "<svg aria-hidden=\"true\" className=\"w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white\" fill=\"currentColor\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z\"></path><path d=\"M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z\"></path></svg>",
-            children: []
-        }
-    ];
     // -----------------------------------------------------------------------------------------------------------------
     return (
         <div className="bg-ol-neutralLighterAlt">
-            <Sidebar items={controls} />
-            <div ref={mapRef} className=" flex-1 z-10 map-container"/>
+            <Sidebar>
+                <SidebarItem text="Mob Spawns" action={() => setShowMarkers(!showMarkers)} state={showMarkers}>
+                    {/* ICON */}
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                </SidebarItem>
+            </Sidebar>
+            <div ref={mapRef} className="flex-1 z-10 map-container" />
         </div>
     );
 }

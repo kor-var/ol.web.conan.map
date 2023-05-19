@@ -1,12 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import {SidebarItem} from "./SidebarItem";
+import React, {useState, useEffect, ReactNode} from 'react';
 
 interface SidebarProps {
-    items: SidebarItem[];
+    children: ReactNode;
 }
-
-function Sidebar(props: SidebarProps) {
-    const {items} = props;
+const Sidebar: React.FC<SidebarProps> = ({ children }) => {
     const [isOpen, setIsOpen] = useState(true);
     const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -84,13 +81,7 @@ function Sidebar(props: SidebarProps) {
                 </button>
                 <div className="flex flex-col h-full w-full px-3 py-4 overflow-y-auto bg-ol-white dark:bg-ol-white">
                     <ul className="space-y-2 w-full font-medium">
-                        {items.map((item, index) => (
-                            <li key={index}>
-                                <button className="flex w-full items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-ol-neutralLight dark:hover:bg-ol-neutralLight">
-                                    <span className="ml-3">{item.text}</span>
-                                </button>
-                            </li>
-                        ))}
+                        {children}
                     </ul>
                     <div className="p-4 mt-auto w-full rounded-lg bg-ol-themeDark dark:bg-ol-themeDarker " role="alert">
                         <div className="flex items-center mb-3">
