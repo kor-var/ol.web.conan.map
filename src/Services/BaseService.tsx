@@ -1,11 +1,14 @@
 
 class BaseService<T> {
     protected _url?: string;
-    protected _data: T[];
+    protected _data: Array<T>;
     constructor() {
         this._data = [];
     }
-    public async getData(): Promise<T[]> {
+    public async getData(): Promise<Array<T>> {
+        // IF DATA IS ALREADY LOADED, RETURN IT
+        if(this._data.length > 0) return this._data;
+        // ELSE LOAD DATA FROM URL
         try {
             // GET DATA FROM URL
             const request = await fetch(`${this._url}`);
@@ -16,7 +19,7 @@ class BaseService<T> {
             }
 
             const response = await request.json();
-            this._data = response as T[];
+            this._data = response as Array<T>
             return this._data;
         }
         catch (error) {

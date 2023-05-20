@@ -5,24 +5,9 @@ interface SidebarProps {
 }
 const Sidebar: React.FC<SidebarProps> = ({ children }) => {
     const [isOpen, setIsOpen] = useState(true);
-    const [isSmallScreen, setIsSmallScreen] = useState(false);
 
     useEffect(() => {
-        const handleResize = () => {
-            const isSmall = window.innerWidth <= 640;
-            setIsSmallScreen(isSmall);
 
-            if (isSmall && !isOpen) {
-                setIsOpen(true);
-            }
-        };
-
-        handleResize();
-        window.addEventListener('resize', handleResize);
-
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
     }, [isOpen]);
 
     const toggleSidebar = () => {
@@ -31,29 +16,6 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
 
     return (
         <div className="absolute flex z-50">
-            {/* Button to Reopen Sidebar */}
-            {!isOpen && isSmallScreen && (
-                <button
-                    className="fixed top-0 right-0 bg-gray-100 text-ol-themePrimary rounded-md p-2 m-2 shadow-md border-2 border-ol-themePrimary"
-                    onClick={toggleSidebar}
-                >
-                    <svg
-                        className="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M4 6h16M4 12h8m-8 6h16"
-                        />
-                    </svg>
-                </button>
-            )}
-
             {/* Sidebar Navigation */}
             <aside
                 className={`fixed top-0 left-0 h-screen w-64 bg-ol-neutralQuaternary shadow-lg transition-transform ${
@@ -80,6 +42,10 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
                     </svg>
                 </button>
                 <div className="flex flex-col h-full w-full px-3 py-4 overflow-y-auto bg-ol-white dark:bg-ol-white">
+                    <div className="flex flex-col items-center justify-center mb-5">
+                        <img src="/conan-exiles-600x155.png" className="h-16 mr-auto sm:h-16" alt="conan exiles logo"/>
+                        <span className="self-center font-semibold whitespace-nowrap dark:text-ol-neutralTertiaryAlt">Interactive Map</span>
+                    </div>
                     <ul className="space-y-2 w-full font-medium">
                         {children}
                     </ul>
