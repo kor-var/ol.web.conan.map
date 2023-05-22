@@ -5,6 +5,7 @@ import {CheckIcon} from '@heroicons/react/24/outline';
 import SpawnsService from "../Services/SpawnsService";
 import {SpawnMarker} from "../Data/Spawns/SpawnMarker";
 import {IShowSpawnsDictionary, ShowSpawnsDictionary} from "../Data/Spawns/ShowSpawnsDictionary";
+import {IconsSpawns} from "../Data/Icons/IconsDictionary";
 import SidebarItem from "../Sidebar/SidebarItem";
 import SidebarItemDropDown from "../Sidebar/SidebarItemDropDown";
 
@@ -23,6 +24,8 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
     const [showSpawns, setShowSpawnsDictionary] = useState<IShowSpawnsDictionary>(new ShowSpawnsDictionary());
     const [spawns, setSpawns] = useState<Array<SpawnMarker>>(new Array<SpawnMarker>());
     const spawnsService = useMemo(() => new SpawnsService(), []);
+    // -------- ICONS
+    const [icons] = useState<IconsSpawns>(new IconsSpawns());
     const setShowSpawns = (keyToUpdate: string) => {
         setShowSpawnsDictionary((showSpawns) => {
             const updatedShowSpawns: ShowSpawnsDictionary = {...showSpawns};
@@ -48,14 +51,32 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
     useEffect(() => {
         const mapLocal = map.current;
         const markerGroupLocal = markerGroup.current;
+        const buildPopupContent = (spawn: SpawnMarker) : string => {
+            const wikiUrl = "https://conanexiles.fandom.com";
+            let popup = "";
+            spawn.spawns.forEach((spawn) => {
+                popup += `<div class="grid grid-rows-1 bg-ol-neutralLight">`;
+                popup +=    `<div class="col-span-full">`;
+                popup +=        `<a href="${wikiUrl}/${spawn.name}" target="_blank" title="${spawn.name}">`;
+                popup +=            `<span>${spawn.name}</spawn>`;
+                popup +=        `</a>`;
+                popup +=        `<span class="text-xs text-gray-400"> ( ${spawn.type} - ${spawn.chance.replaceAll(/[^a-zA-Z0-9]/g, "")}% )</span>`;
+                popup +=    `</div>`;
+                popup += `</div>`;
+            });
+            return popup;
+        };
         const addMobSpawns = (spawns: Array<SpawnMarker>) => {
             spawns.forEach((spawn) => {
                 const customIcon = L.icon({
-                    iconUrl: "https://gamepedia.cursecdn.com/conanexiles_gamepedia/thumb/d/da/T_Map_Icon_Purge.png/24px-T_Map_Icon_Purge.png",
-                    iconSize: [24, 24],
+                    iconUrl: `${icons[spawn.spawns[0].type]}`,
+                    iconSize: [20, 20],
                 });
-                const markerInstance = L.marker([(-spawn.marker[1] / 1000), (spawn.marker[0] / 1000)], {icon: customIcon}).bindPopup(spawn.id);
+                const popupContent = buildPopupContent(spawn);
+                const customPopupOptions = {};
+                const markerInstance = L.marker([(-spawn.marker[1] / 1000), (spawn.marker[0] / 1000)], {icon: customIcon}).bindPopup(popupContent, customPopupOptions);
                 markerGroup.current.addLayer(markerInstance);
+
             });
             return () => {
             };
@@ -63,14 +84,9 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
         const fetchSpawns = async () => {
             try {
                 const spawnData = await spawnsService.getSpawns();
-                const filteredSpawns = spawnData.map(data => ({
-                    ...data,
-                    spawns: data.spawns.filter(spawn => spawn.type !== undefined)
-                }));
-                setSpawns(filteredSpawns);
-
+                setSpawns(spawnData);
             } catch (error) {
-                console.error('Error loading JSON data:', error);
+                console.error('Error loading SPAWN JSON data:', error);
             }
         };
 
@@ -81,7 +97,7 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
                 });
             }
             // add spawns to map where showSpawns is true
-            addMobSpawns(spawns.filter((spawn) => spawn.spawns.some((spawn) => showSpawns[`${spawn.type.concat(spawn.id).replace(/[^a-zA-Z0-9]/g, '')}`])));
+            addMobSpawns(spawns.filter((spawn) => spawn.spawns.some((spawn) => showSpawns[`${spawn.type.concat(spawn.id)}`])));
             if (map.current) {
                 markerGroup.current.addTo(map.current);
             }
@@ -100,7 +116,7 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
                 }
             }
         };
-    }, [spawnsService, showSpawns, spawns, markerGroup, map]);
+    }, [spawnsService, showSpawns, spawns, icons, markerGroup, map]);
     // -----------------------------------------------------------------------------------------------------------------
     return (
         <>
@@ -191,6 +207,10 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
                 </SidebarItem>
                 <SidebarItem text="Blacksmiths" action={() => setShowSpawns("Blacksmith")}
                              state={isKeyEnabled("Blacksmith")} classNameText="text-sm overflow-clip">
+                    <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
+                </SidebarItem>
+                <SidebarItem text="Bearer" action={() => setShowSpawns("Bearer")}
+                             state={isKeyEnabled("Bearer")} classNameText="text-sm overflow-clip">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
                 <SidebarItem text="Carpenters" action={() => setShowSpawns("Carpenter")}
@@ -299,10 +319,6 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
             </SidebarItemDropDown>
             {/* MERCHANTS */}
             <SidebarItemDropDown text="Merchants" id="merchants-spawns-dropdown">
-                <SidebarItem text="Bearer" action={() => setShowSpawns("Bearer")}
-                             state={isKeyEnabled("Bearer")} classNameText="text-sm overflow-clip">
-                    <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
-                </SidebarItem>
                 <SidebarItem text="Merchant" action={() => setShowSpawns("MerchantNPCMerchant")}
                              state={isKeyEnabled("MerchantNPCMerchant")} classNameText="text-sm overflow-clip">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>

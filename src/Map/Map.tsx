@@ -42,8 +42,8 @@ function Map() {
                 .addAttribution('Images/Icons © <a href="https://www.funcom.com/" target="_new">Funcom</a> | Source: <a href="https://conanexiles.gamepedia.com/" target="_new">Conan Exiles Wiki</a>')
                 .addTo(map.current);
 
-            const mapCenter: LatLngTuple = [15, 63];
-            const mapZoom = 1.5;
+            const mapCenter: LatLngTuple = [8, 8];
+            const mapZoom = 1.0;
             map.current.setView(mapCenter, mapZoom);
         }
     }, []);

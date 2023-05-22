@@ -3,3 +3,29 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0)
 }
+
+/* OVERRIDE Leaflet.css */
+.leaflet-control-attribution {
+    color: lightgrey !important;
+    background: rgba(64,64,64, 0.8) !important;
+    margin: 0 !important;
+    border-radius: 5px !important;
+    border: 1px !important;
+}
+.leaflet-control-attribution a {
+    color: lightskyblue !important;
+    text-decoration-line: underline !important;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out{
+    color: #6813FF !important;
+    border-radius: 1px !important;
+    border-color: #444749 !important;
+}
+.leaflet-popup-content a {
+    color: lightskyblue !important;
+}
+.leaflet-popup-content-wrapper, .leaflet-popup-tip {
+    background: rgba(53, 55, 57, 1) !important;
+}
