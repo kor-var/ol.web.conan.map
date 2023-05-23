@@ -51,7 +51,7 @@ function Map() {
     return (
         <div className="bg-ol-neutralLighterAlt">
             <Sidebar>
-                <SidebarItemDropDown id="spawns-drop-down" text="Spawn Locations">
+                <SidebarItemDropDown id="spawns-drop-down" text="Spawn Locations" classNameButton="rounded-lg">
                     <MapSpawns mapInstance={getMap} markerGroupInstance={getMarkerGroup} />
                 </SidebarItemDropDown>
             </Sidebar>

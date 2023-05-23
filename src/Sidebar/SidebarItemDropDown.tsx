@@ -2,12 +2,14 @@ import React, {ReactNode, useState} from 'react';
 import {ChevronDownIcon} from '@heroicons/react/24/outline';
 
 interface SidebarItemDropDownProps {
-    children: ReactNode;
-    id: string;
-    text: string;
+    children: ReactNode,
+    id: string,
+    text: string,
+    classNameButton?: string,
+    classNameList?: string,
 }
 
-const SidebarItemDropDown: React.FC<SidebarItemDropDownProps> = ({children, id, text}) => {
+const SidebarItemDropDown: React.FC<SidebarItemDropDownProps> = ({children, id, text, classNameButton, classNameList}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleItemClick = (): void => {
@@ -15,8 +17,8 @@ const SidebarItemDropDown: React.FC<SidebarItemDropDownProps> = ({children, id, 
     };
 
     return (
-        <li className="rounded-lg">
-            <button type="button" onClick={handleItemClick} className="flex relative p-2 w-full items-center text-gray-900 rounded-lg dark:text-white hover:bg-ol-neutralLight dark:hover:bg-ol-neutralLight"
+        <li>
+            <button type="button" onClick={handleItemClick} className={`flex relative p-2 w-full items-center text-gray-900 dark:text-white hover:bg-ol-neutralLight dark:hover:bg-ol-neutralLight ${classNameButton}`}
                 aria-controls={id} data-collapse-toggle={id}>
                 <span className="flex-1 ml-2 text-left whitespace-nowrap">{text}</span>
                 <ChevronDownIcon
@@ -24,7 +26,7 @@ const SidebarItemDropDown: React.FC<SidebarItemDropDownProps> = ({children, id, 
                         isOpen ? 'rotate-180 text-ol-themeSecondary' : ''
                     }`}/>
             </button>
-            {isOpen && <ul id={id} className="space-y-2 rounded-lg bg-ol-neutralLighter">{children}</ul>}
+            {isOpen && <ul id={id} className={`${classNameList}`}>{children}</ul>}
         </li>
     );
 };

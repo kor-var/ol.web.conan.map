@@ -22,7 +22,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
                     isOpen ? 'translate-x-0' : '-translate-x-full'
                 }`}
             >
-                <button className="absolute top-0 right-[-58px] bg-gray-100 text-ol-themePrimary rounded-md p-2 m-2 shadow-md border-2 border-ol-themePrimary"
+                <button className="absolute top-0 right-[-58px] bg-gray-100 text-ol-themePrimary rounded-md p-2 m-2 shadow-md border-2 border-ol-themePrimary hover:bg-ol-neutralPrimaryAlt"
                     onClick={toggleSidebar} >
                     <svg
                         className={`w-6 h-6 transform ${

@@ -121,9 +121,9 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
     return (
         <>
             {/* DIALOG NPCs */}
-            <SidebarItemDropDown text="Dialog NPC" id="dialognpcs-spawns-dropdown">
+            <SidebarItemDropDown text="Dialog NPC" id="dialognpcs-spawns-dropdown" classNameButton="rounded-lg" classNameList="rounded-lg bg-ol-neutralLighter">
                 <SidebarItem text="Arcosthe Wanderer" action={() => setShowSpawns("DialogNPCDialogueArcostheWanderer")}
-                             state={isKeyEnabled("DialogNPCDialogueArcostheWanderer")} classNameText="text-sm overflow-clip">
+                             state={isKeyEnabled("DialogNPCDialogueArcostheWanderer")} classNameText="text-sm overflow-clip" classNameButton="border-t-2 rounded-t-lg border-ol-themePrimary">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
                 <SidebarItem text="Blacksmith Ghost" action={() => setShowSpawns("DialogNPCDialogueBlacksmithGhost")}
@@ -191,14 +191,14 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
                 <SidebarItem text="Votaries of Skelos Sorcerer Master Darfari" action={() => setShowSpawns("DialogNPCVotariesOfSkelosSorcererMasterDarfari")}
-                             state={isKeyEnabled("DialogNPCVotariesOfSkelosSorcererMasterDarfari")} classNameText="text-sm overflow-clip">
+                             state={isKeyEnabled("DialogNPCVotariesOfSkelosSorcererMasterDarfari")} classNameText="text-sm overflow-clip" classNameButton="border-b-2 border-ol-themePrimary rounded-b-lg">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
             </SidebarItemDropDown>
             {/* ARTISANS */}
-            <SidebarItemDropDown text="Artisans" id="artisans-spawns-dropdown">
+            <SidebarItemDropDown text="Artisans" id="artisans-spawns-dropdown" classNameButton="rounded-lg" classNameList="rounded-lg bg-ol-neutralLighter" >
                 <SidebarItem text="Alchemists" action={() => setShowSpawns("Alchemist")}
-                             state={isKeyEnabled("Alchemist")} classNameText="text-sm overflow-clip">
+                             state={isKeyEnabled("Alchemist")} classNameText="text-sm overflow-clip" classNameButton="border-t-2 rounded-t-lg border-ol-themePrimary">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
                 <SidebarItem text="Armorer" action={() => setShowSpawns("Armorer")}
@@ -238,14 +238,14 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
                 <SidebarItem text="Taskmaster" action={() => setShowSpawns("Taskmaster")}
-                             state={isKeyEnabled("Taskmaster")} classNameText="text-sm overflow-clip">
+                             state={isKeyEnabled("Taskmaster")} classNameText="text-sm overflow-clip" classNameButton="border-b-2 border-ol-themePrimary rounded-b-lg">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
             </SidebarItemDropDown>
             {/* FIGHTERS */}
-            <SidebarItemDropDown text="Fighters" id="fighters-spawns-dropdown">
+            <SidebarItemDropDown text="Fighters" id="fighters-spawns-dropdown" classNameButton="rounded-lg" classNameList="rounded-lg bg-ol-neutralLighter" >
                 <SidebarItem text="Archers" action={() => setShowSpawns("Archer")}
-                             state={isKeyEnabled("Archer")} classNameText="text-sm overflow-clip">
+                             state={isKeyEnabled("Archer")} classNameText="text-sm overflow-clip" classNameButton="border-t-2 rounded-t-lg border-ol-themePrimary">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
                 <SidebarItem text="BlackHand" action={() => setShowSpawns("FighterBlackHand")}
@@ -313,14 +313,14 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
                 <SidebarItem text="Votaries" action={() => setShowSpawns("FighterVotaries")}
-                             state={isKeyEnabled("FighterVotariesAssin")} classNameText="text-sm overflow-clip">
+                             state={isKeyEnabled("FighterVotariesAssin")} classNameText="text-sm overflow-clip" classNameButton="border-b-2 border-ol-themePrimary rounded-b-lg">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
             </SidebarItemDropDown>
             {/* MERCHANTS */}
-            <SidebarItemDropDown text="Merchants" id="merchants-spawns-dropdown">
+            <SidebarItemDropDown text="Merchants" id="merchants-spawns-dropdown" classNameButton="rounded-lg" classNameList="rounded-lg bg-ol-neutralLighter" >
                 <SidebarItem text="Merchant" action={() => setShowSpawns("MerchantNPCMerchant")}
-                             state={isKeyEnabled("MerchantNPCMerchant")} classNameText="text-sm overflow-clip">
+                             state={isKeyEnabled("MerchantNPCMerchant")} classNameText="text-sm overflow-clip" classNameButton="border-t-2 rounded-t-lg border-ol-themePrimary">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
                 <SidebarItem text="Shamalla" action={() => setShowSpawns("MerchantNPCShamalla")}
@@ -332,14 +332,14 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
                 <SidebarItem text="Zeina" action={() => setShowSpawns("MerchantNPCZeina")}
-                             state={isKeyEnabled("MerchantNPCZeina")} classNameText="text-sm overflow-clip">
+                             state={isKeyEnabled("MerchantNPCZeina")} classNameText="text-sm overflow-clip" classNameButton="border-b-2 border-ol-themePrimary rounded-b-lg">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
             </SidebarItemDropDown>
             {/* WILDLIFE */}
-            <SidebarItemDropDown text="Wildlife" id="wildlife-spawns-dropdown">
+            <SidebarItemDropDown text="Wildlife" id="wildlife-spawns-dropdown" classNameButton="rounded-lg" classNameList="rounded-lg bg-ol-neutralLighter" >
                 <SidebarItem text="Jaguar" action={() => setShowSpawns("CritterWildlifeJaguar")}
-                             state={isKeyEnabled("CritterWildlifeJaguar")} classNameText="text-sm overflow-clip">
+                             state={isKeyEnabled("CritterWildlifeJaguar")} classNameText="text-sm overflow-clip" classNameButton="border-t-2 rounded-t-lg border-ol-themePrimary">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
                 <SidebarItem text="Kappa" action={() => setShowSpawns("CritterWildlifeKappa")}
@@ -383,14 +383,14 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
                 <SidebarItem text="Rhino" action={() => setShowSpawns("CritterWildlifeRhino")}
-                             state={isKeyEnabled("CritterWildlifeRhino")} classNameText="text-sm overflow-clip">
+                             state={isKeyEnabled("CritterWildlifeRhino")} classNameText="text-sm overflow-clip" classNameButton="border-b-2 border-ol-themePrimary rounded-b-lg">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
             </SidebarItemDropDown>
             {/* MINI BOSSES */}
-            <SidebarItemDropDown text="Mini Bosses" id="minibosses-spawns-dropdown">
+            <SidebarItemDropDown text="Mini Bosses" id="minibosses-spawns-dropdown" classNameButton="rounded-lg" classNameList="rounded-lg bg-ol-neutralLighter" >
                 <SidebarItem text="BlackHand" action={() => setShowSpawns("MiniBossBlackHandFighter")}
-                             state={isKeyEnabled("MiniBossBlackHandFighter")} classNameText="text-sm overflow-clip">
+                             state={isKeyEnabled("MiniBossBlackHandFighter")} classNameText="text-sm overflow-clip" classNameButton="border-t-2 rounded-t-lg border-ol-themePrimary">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
                 <SidebarItem text="Archivist Ghost" action={() => setShowSpawns("MiniBossBossArchivistGhost")}
@@ -582,14 +582,14 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
                 <SidebarItem text="Witch Queen Statue" action={() => setShowSpawns("MiniBossWitchQueenStatue")}
-                             state={isKeyEnabled("MiniBossWitchQueenStatue")} classNameText="text-sm overflow-clip">
+                             state={isKeyEnabled("MiniBossWitchQueenStatue")} classNameText="text-sm overflow-clip" classNameButton="border-b-2 border-ol-themePrimary rounded-b-lg">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
             </SidebarItemDropDown>
             {/* WORLD BOSSES */}
-            <SidebarItemDropDown text="World Bosses" id="worldbosses-spawns-dropdown">
+            <SidebarItemDropDown text="World Bosses" id="worldbosses-spawns-dropdown" classNameButton="rounded-lg" classNameList="rounded-lg bg-ol-neutralLighter" >
                 <SidebarItem text="Abandoned City Flame Guardian" action={() => setShowSpawns("WorldBossAbandonedCityBossFlameGuardian")}
-                             state={isKeyEnabled("WorldBossAbandonedCityBossFlameGuardian")} classNameText="text-sm overflow-clip">
+                             state={isKeyEnabled("WorldBossAbandonedCityBossFlameGuardian")} classNameText="text-sm overflow-clip" classNameButton="border-t-2 rounded-t-lg border-ol-themePrimary">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
                 <SidebarItem text="Abandoned City The Brute" action={() => setShowSpawns("WorldBossAbandonedCityBossTheBrute")}
@@ -785,7 +785,7 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
                 <SidebarItem text="Witch Queen" action={() => setShowSpawns("WorldBossWitchQueen")}
-                             state={isKeyEnabled("WorldBossWitchQueen")} classNameText="text-sm overflow-clip">
+                             state={isKeyEnabled("WorldBossWitchQueen")} classNameText="text-sm overflow-clip" classNameButton="border-b-2 border-ol-themePrimary rounded-b-lg">
                     <CheckIcon className="h-4 w-4 mr-2 text-lg text-green-400"/>
                 </SidebarItem>
             </SidebarItemDropDown>

@@ -19,13 +19,33 @@
 
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out{
-    color: #6813FF !important;
+    color: rgb(104, 19, 255) !important;
     border-radius: 1px !important;
     border-color: #444749 !important;
 }
+
+.leaflet-control-zoom-in{
+    border-top-right-radius: 2px !important;
+    border-top-left-radius: 2px !important;
+}
+
+.leaflet-control-zoom-out{
+    border-bottom-right-radius: 2px !important;
+    border-bottom-left-radius: 2px !important;
+}
+
 .leaflet-popup-content a {
     color: lightskyblue !important;
 }
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
     background: rgba(53, 55, 57, 1) !important;
+}
+
+.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+    border: 2px solid rgba(104, 19, 255,1.2);
+    border-radius: 5px !important;
+}
+
+.leaflet-bar a:hover, .leaflet-bar a:focus {
+    background-color: #dadada !important;
 }
