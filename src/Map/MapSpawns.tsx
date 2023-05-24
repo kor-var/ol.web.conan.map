@@ -68,7 +68,7 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
         const addMobSpawns = (spawns: Array<SpawnMarker>) => {
             spawns.forEach((spawn) => {
                 const customIcon = L.icon({
-                    iconUrl: `${icons[spawn.spawns[0].type]}`,
+                    iconUrl: `${spawn.spawns[0].icon}`,
                     iconSize: [20, 20],
                 });
                 const popupContent = buildPopupContent(spawn);

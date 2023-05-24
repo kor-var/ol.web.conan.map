@@ -4,4 +4,5 @@ export interface ISpawn {
     chance: string;
     id: string;
     fm: string;
+    icon: string;
 }
