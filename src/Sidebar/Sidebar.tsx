@@ -43,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
                 </button>
                 <div className="flex flex-col h-full w-full px-3 py-4 bg-ol-white dark:bg-ol-white">
                     <div className="flex flex-col items-center justify-center mb-5">
-                        <img src="/conan-exiles-600x155.png" className="h-16 mr-auto sm:h-16" alt="conan exiles logo"/>
+                        <img src={`${window.location.href}/conan-exiles-600x155.png`} className="h-16 mr-auto sm:h-16" alt="conan exiles logo"/>
                         <span className="self-center font-semibold whitespace-nowrap dark:text-ol-neutralTertiaryAlt">Interactive Map</span>
                     </div>
                     <div className="scroll scroll-1 h-full w-full pr-2 overflow-y-auto rounded-lg">

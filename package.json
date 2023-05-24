@@ -24,7 +24,8 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "ghdeploy": "gh-pages -d build",
+    "deploy": "npm run ghdeploy -- -m \"deployment\" --repo https://github.com/kor-var/ol.web.conan.map.git",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
