@@ -18,7 +18,7 @@ const SidebarItemDropDown: React.FC<SidebarItemDropDownProps> = ({children, id, 
 
     return (
         <li>
-            <button type="button" onClick={handleItemClick} className={`flex relative p-2 w-full items-center text-gray-900 dark:text-white hover:bg-ol-neutralLight dark:hover:bg-ol-neutralLight ${classNameButton}`}
+            <button type="button" onClick={handleItemClick} className={`flex relative p-2 w-full items-center text-gray-900 dark:text-white hover:bg-ol-neutralPrimaryAlt dark:hover:bg-ol-neutralLight ${classNameButton}`}
                 aria-controls={id} data-collapse-toggle={id}>
                 <span className="flex-1 ml-2 text-left whitespace-nowrap">{text}</span>
                 <ChevronDownIcon

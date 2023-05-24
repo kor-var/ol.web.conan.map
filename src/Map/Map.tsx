@@ -1,7 +1,6 @@
 import React, {useEffect, useRef} from 'react';
-import L, {LatLngBoundsLiteral, LatLngTuple} from 'leaflet';
-import 'leaflet/dist/leaflet.css';
 import './Map.css';
+import L, {LatLngBoundsLiteral, LatLngTuple} from 'leaflet';
 import Sidebar from "../Sidebar/Sidebar";
 import SidebarItemDropDown from "../Sidebar/SidebarItemDropDown";
 import MapSpawns from "./MapSpawns";
@@ -36,7 +35,33 @@ function Map() {
 
             L.imageOverlay('https://gamepedia.cursecdn.com/conanexiles_gamepedia/f/fb/MiniMapFull.jpg', bounds).addTo(map.current);
 
-            L.control.zoom({ position: 'topright' }).addTo(map.current);
+            const zoomControl = L.control.zoom({
+                position: 'topright',
+            });
+            zoomControl.addTo(map.current);
+
+            const zoomControlElement = document.querySelector('.leaflet-control-zoom');
+            console.log(zoomControlElement);
+            if (zoomControlElement) {
+                /* bg-ol-neutralPrimary dark:bg-ol-white hover:bg-ol-neutralPrimaryAlt dark:hover:bg-ol-neutralLighter */
+                zoomControlElement.classList.add('rounded-lg-1');
+                zoomControlElement.classList.add('bg-ol-neutralPrimary');
+                zoomControlElement.classList.add('dark:bg-ol-white');
+                zoomControlElement.classList.add('border-2');
+                zoomControlElement.classList.add('border-ol-themePrimary');
+                zoomControlElement.classList.add('text-ol-themePrimary');
+
+                const zoomInControlElement = zoomControlElement.querySelector('.leaflet-control-zoom-in');
+                const zoomOutControlElement = zoomControlElement.querySelector('.leaflet-control-zoom-out');
+                if(zoomInControlElement){
+                    zoomInControlElement.classList.add('hover:bg-ol-neutralPrimaryAlt');
+                    zoomInControlElement.classList.add('dark:hover:bg-ol-neutralLighter');
+                }
+                if(zoomOutControlElement){
+                    zoomOutControlElement.classList.add('hover:bg-ol-neutralPrimaryAlt');
+                    zoomOutControlElement.classList.add('dark:hover:bg-ol-neutralLighter');
+                }
+            }
 
             L.control.attribution({ position: 'bottomright' })
                 .addAttribution('Images/Icons © <a href="https://www.funcom.com/" target="_new">Funcom</a> | Source: <a href="https://conanexiles.gamepedia.com/" target="_new">Conan Exiles Wiki</a>')
@@ -49,9 +74,9 @@ function Map() {
     }, []);
     // -----------------------------------------------------------------------------------------------------------------
     return (
-        <div className="bg-ol-neutralLighterAlt">
+        <div className="bg-ol-neutralPrimaryAlt dark:bg-ol-neutralLighterAlt">
             <Sidebar>
-                <SidebarItemDropDown id="spawns-drop-down" text="Spawn Locations" classNameButton="rounded-lg">
+                <SidebarItemDropDown id="spawns-drop-down" text="Spawn Locations" classNameButton="rounded">
                     <MapSpawns mapInstance={getMap} markerGroupInstance={getMarkerGroup} />
                 </SidebarItemDropDown>
             </Sidebar>
