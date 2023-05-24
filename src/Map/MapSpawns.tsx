@@ -57,7 +57,7 @@ const MapSpawns: React.FC<MapSpawnProps> = ({mapInstance, markerGroupInstance}) 
                 popup += `<div class="grid grid-rows-1">`;
                 popup +=    `<div class="col-span-full">`;
                 popup +=        `<a href="${wikiUrl}/${spawn.name}" target="_blank" title="${spawn.name}">`;
-                popup +=            `<span class="text-blue-600 dark:text-blue-400 underline">${spawn.name}</spawn>`;
+                popup +=            `<span class="text-blue-600 dark:text-blue-400 underline">${spawn.name}</span>`;
                 popup +=        `</a>`;
                 popup +=        `<span class="text-xs text-gray-700 dark:text-gray-400"> ( ${spawn.type} - ${spawn.chance.replaceAll(/[^a-zA-Z0-9]/g, "")}% )</span>`;
                 popup +=    `</div>`;

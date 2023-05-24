@@ -41,7 +41,6 @@ function Map() {
             zoomControl.addTo(map.current);
 
             const zoomControlElement = document.querySelector('.leaflet-control-zoom');
-            console.log(zoomControlElement);
             if (zoomControlElement) {
                 /* bg-ol-neutralPrimary dark:bg-ol-white hover:bg-ol-neutralPrimaryAlt dark:hover:bg-ol-neutralLighter */
                 zoomControlElement.classList.add('rounded-lg-1');
